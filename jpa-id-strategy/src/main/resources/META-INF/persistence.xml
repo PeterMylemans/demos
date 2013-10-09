@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="demo" transaction-type="RESOURCE_LOCAL">
+        <class>com.petermylemans.demos.identitycrisis.EntityUsingIdentity</class>
+        <class>com.petermylemans.demos.identitycrisis.EntityUsingTableGenerator</class>
+        <class>com.petermylemans.demos.identitycrisis.EntityUsingSequenceGenerator</class>
+
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:test-jpa;create=true"/>
+            <property name="javax.persistence.jdbc.user" value="test"/>
+            <property name="javax.persistence.jdbc.password" value="test"/>
+
+            <!-- Set up in memory database -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            
+            <!-- Enable batching of jdbc statements -->
+            <property name="hibernate.jdbc.batch_size" value="20" />
+
+            <!-- Show sql for demo purposes -->
+            <property name="hibernate.show_sql" value="true" />
+
+            <!-- Use new id generator mapping for annotated entities to fix some issues like neg. ids -->
+            <property name="hibernate.id.new_generator_mappings" value="true" />
+        </properties>
+    </persistence-unit>
+</persistence>
